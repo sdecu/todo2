@@ -3,7 +3,7 @@ import './style.css';
 import { compareAsc, format } from "date-fns";
 
 
-
+let projectObj = {'home' : []}
 //function to create new project
 const add = document.querySelector('.add');
 const modal = document.querySelector('#project');
@@ -21,14 +21,13 @@ closeModal.addEventListener("click", () => {
 
 submitProject.addEventListener("click", (event) => {
   event.preventDefault();
-  const temp = input.value;
-  createNewProject(temp);
+  createNewProject(input.value);
   input.value = '';
 modal.close();
   plus();
 });
    
-      
+
 
 function createNewProject (name) {
   const nav = document.querySelector('nav');
@@ -38,7 +37,8 @@ function createNewProject (name) {
   const plus = document.createElement('li');
   plus.classList.add(i);
   plus.classList.add('plus');
-  plus.textContent = 'plus'
+  plus.textContent = 'plus';
+  
   ul.append(plus);
 
   const li = document.createElement('li');
@@ -72,15 +72,6 @@ function createNewProject (name) {
     </section>
   </article>
 </section>
-
-      function test() {
-  const section = element.section;
-  let p = element.p;
-  p.textContent = 'test';
-  p.classList.add('test');
-  section.append(p);
-}
-test();
 */ 
 function plus()  {
   const plusarr = document.querySelectorAll('.plus');
@@ -95,7 +86,8 @@ for (const element of plusarr) {
   if (plusEl.getAttribute('listener') !== 'true') {
   plusEl.setAttribute('listener', true);
   plusEl.addEventListener("click", (event) => {
-  console.log(plusEl);
+    event.preventDefault();
+    createNewTask()
   });
 }
 
@@ -105,12 +97,80 @@ for (const element of plusarr) {
 plus();
 
 
-function createNewTask  (parentElement, task)  {
+function createNewTask  (task, description, dueDate, priority) {
+  // Create the main card container
+  const cardContainer = document.querySelector("section");
+  cardContainer.classList.add("card-list");
 
+  // Create the card element
+  const card = document.createElement("article");
+  card.classList.add("card");
+
+  // Create the header
+  const header = document.createElement("header");
+  header.classList.add("title");
+
+  // Create the task title
+  const taskTitle = document.createElement("h2");
+  taskTitle.textContent = task;
+
+  const plusIcon = document.createElement("div");
+  plusIcon.classList.add("plus");
+  plusIcon.textContent = "plus";
+
+  // Append the task title and plus icon to the header
+  header.appendChild(taskTitle);
+  header.appendChild(plusIcon);
+
+  // Create the task info section
+  const infoSection = document.createElement("section");
+  infoSection.classList.add("todo-info");
+
+  // Create the description element
+  const descriptionElement = document.createElement("div");
+  descriptionElement.classList.add("description");
+  const descriptionText = document.createElement("p");
+  descriptionText.textContent = description;
+  descriptionElement.appendChild(descriptionText);
+
+  // Create the due date element
+  const dueDateElement = document.createElement("div");
+  dueDateElement.classList.add("due-date");
+  dueDateElement.textContent = dueDate;
+
+  // Create the priority element
+  const priorityElement = document.createElement("div");
+  priorityElement.classList.add("priority");
+  priorityElement.textContent = priority;
+
+  // Create the delete element
+  const deleteElement = document.createElement("div");
+  deleteElement.classList.add("delete");
+  deleteElement.textContent = "delete";
+
+  // Append the task info elements to the info section
+  infoSection.appendChild(descriptionElement);
+  infoSection.appendChild(dueDateElement);
+  infoSection.appendChild(priorityElement);
+  infoSection.appendChild(deleteElement);
+
+  // Append the header and info section to the card
+  card.appendChild(header);
+  card.appendChild(infoSection);
+
+  // Append the card to the card container
+  cardContainer.appendChild(card);
 }
+const test = {test : ['test', 'test', 'test', 'test']};
+
+createNewTask(test.test[0], test.test[1], test.test[2], test.test[3], );
 
 //add button functionality
-
+const w = {one : [2, 5]};
+const y = w;
+let z = 2;
+w.one[0]++;
+console.log(w.one,y.one,z);
 
 function getCard(element) {
 
