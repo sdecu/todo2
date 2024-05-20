@@ -1,134 +1,116 @@
 import './style.css';
 import { compareAsc, format } from "date-fns";
 
-/*
-<article class="card">
-  <header class="title">
-    <h2>task</h2>
-    <div class="plus">plus</div>
-  </header>
-  <section class="todo-info">
-    <div class="description">
-      <p>Lorem ipsum dolor</p>
-      <div class="delete">delete</div>
-    </div>
-    <div class="dueDate">12-06-24</div>
-    <div class="priority">urgent</div>
-  </section>
-</article>
-*/
-let element = (function ()  {
-  const section = document.querySelector('section');
-  const card = document.createElement('article');
-  const header = document.createElement('header');
-  const projectNameHeading = document.createElement('h2');
-  const plusText = document.createElement('div');
-  const todo = document.createElement('div');
-  const todoP = document.createElement('p');
-  const todoDelete = document.createElement('div');
 
-  return  {
-    section,
-    card,
-    header,
-    projectNameHeading,
-    plusText,
-    todo,
-    todoP,
-    todoDelete,
-  }
 
-})();
-
-function test ()  {
- const section = element.section;
- const p = element.todoP;
- p.textContent = 'test';
- section.append(p);
-}
-test();
 //function to create new project
-
-
-function createNewProject (projectName) {
-
+const add = document.querySelector('.add')
   
+add.onclick = function(name)  {
+  const modal = document.querySelector('#project');
+    modal.showModal();
 
-  card.classList.add('card');
-  section.appendChild(card);
+    const closeModal = document.querySelector(".close-button");
+    closeModal.addEventListener("click", () => {
+      modal.close();
+    })
+    
+  const submitProject = document.querySelector("#submit-project");
+  const input = document.querySelector('#project-name');
+  submitTask.addEventListener("click", (event) => {
+    let temp = input.value;
+    createNewProject(temp);
+  });
+}
 
-  header.classList.add('projectName');
-  card.appendChild(header);
+   
+      
 
-  projectNameHeading.textContent = projectName;
-  header.appendChild(projectNameHeading);
+function createNewProject (name) {
+  const nav = document.querySelector('nav');
+  const i = name;
 
-  plusText.classList.add(`plus`);
-  plusText.classList.add(Date.now());
-  plusText.textContent = 'plus';
-  header.appendChild(plusText);
-  return {
-    card
-  }
-  ;
+  const ul = document.createElement('ul');
+  const plus = document.createElement('li');
+  plus.classList.add(i);
+  plus.classList.add(Date.now());
+  plus.textContent = 'plus'
+  ul.append(plus);
+
+  const li = document.createElement('li');
+  li.innerText = i;
+  ul.append(li);
+
+  const remove = document.createElement('li');
+  remove.classList.add('delete');
+  remove.textContent = 'delete';
+  ul.append(remove);
+
+  nav.append(ul); 
 }
 
 //function to create new task
 
-createNewProject('test');
+/*
+<section class="card-list">
+  <article class="card">
+    <header class="title">
+      <h2>task</h2>
+      <div class="plus">plus</div>
+    </header>
+    <section class="todo-info">
+      <div class="description">
+        <p>120</p>
+      </div>
+      <div class="due-date">12-06-24</div>
+      <div class="priority">urgent</div>
+      <div class="delete">delete</div>
+    </section>
+  </article>
+</section>
 
-function createNewTask  (element, task)  {
-  const card = getCard(element)
+      function test() {
+  const section = element.section;
+  let p = element.p;
+  p.textContent = 'test';
+  p.classList.add('test');
+  section.append(p);
+}
+test();
+*/ 
 
-  todo.classList.add('content');
+add.onclick = function(name)  {
+  const modal = document.querySelector('#project');
+    modal.showModal();
 
-  todoP.textContent = task;
-  todo.appendChild(todoP);
+    const closeModal = document.querySelector(".close-button");
+    closeModal.addEventListener("click", () => {
+      modal.close();
+    })
+    
+  const submitProject = document.querySelector("#submit-project");
+  const input = document.querySelector('#project-name');
+  submitTask.addEventListener("click", (event) => {
+    let temp = input.value;
+    createNewProject(temp);
+  });
+}
 
-  todoDelete.classList.add("delete");
-  todoDelete.textContent = 'delete';
-  todo.appendChild(todoDelete);
 
-  card.appendChild(todo);
+function createNewTask  (parentElement, task)  {
+
 }
 
 //add button functionality
 
 
 function getCard(element) {
-  const plus = element.getAttribute('class');
-  const temp = document.getElementsByClassName(plus);
-  const plusEl = temp[0];
-  const card = plusEl.closest('.card');
-  console.log(card);
-  return {
-    card,
-    
-  }
+
 }
 
-const plusArr = document.querySelectorAll('.plus');
-
-for (let element of plusArr) {
-  element.addEventListener("click", () => {
-    modal.showModal();
-  });
-}
 
 
   // modal
 
-  (function() {
-  const modal = document.querySelector("#modal");
-  const closeModal = document.querySelector(".close-button");
-  const submitTask = document.querySelector("#submit-task")
-  
-  
-  closeModal.addEventListener("click", () => {
-    modal.close();
-  });
 
-  submitTask.onclick = function() {
-    createNewTask(element, 'example')
-  }
-  })();
+  

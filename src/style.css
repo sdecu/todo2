@@ -100,19 +100,108 @@ ul {
 
 .todo-info {
   display: grid;
-  grid-template-columns: 40fr 1fr 1fr 1fr 1fr;
+  grid-t3emplate-columns: 40fr 1fr 1fr 1fr 1fr;
   gap: 10px;
   box-sizing: border-box;
   width: 100%;
   background-color: #504945;
   padding: 2px 16px;
+}:root   {
+  --gruvbox-dark-bg: #282828;
+  --gruvbox-dark-fg: #ebdbb2;
+  --gruvbox-dark-red: #cc241d;
+  --gruvbox-dark-green: #98971a;
+  --gruvbox-dark-yellow: #d79921;
+  --gruvbox-dark-blue: #458588;
+  --gruvbox-dark-purple: #b16286;
+  --gruvbox-dark-aqua: #689d6a;
+  --gruvbox-dark-orange: #d65d0e;
+  --gruvbox-dark-gray: #a89984;
 }
 
-.projectName  {
+body   {
+  background-color: var(--gruvbox-dark-fg);
+  margin: 0;
+  padding: 0;
+  overflow:hidden;
+}
+
+.card-list::-webkit-scrollbar {
+ display: none;
+}
+
+#content    {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+header  {
   display: flex;
   justify-content: center;
+  background-color: #1d2021;
+  height: 80px;
 }
 
+header h1   {
+  color: var(--gruvbox-dark-fg);
+}
+
+nav {
+  width: fit-content;
+  background-color: #458588;
+  height: calc(100vh - 80px);
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+
+ul a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li  {
+  display: inline;
+
+  color: #000;
+  padding: 8px 8px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #504945;
+  color: #b16286;
+}
+
+ul a:hover {
+  background-color: #504945;
+  color: #b16286;
+}
+
+.material-symbols-outlined {
+font-variation-settings:
+'FILL' 0,
+'wght' 400,
+'GRAD' 0,
+'opsz' 24
+}
+
+.card {
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+transition: 0.3s;
+border-radius: 5px;
+width: 80vw;
+height: fit-content;
+background-color: var(--gruvbox-dark-bg);
+color: var(--gruvbox-dark-fg);
+display: flex;
+}
 .card-list  {
   display: flex;
   flex-direction: column;
@@ -126,6 +215,14 @@ ul {
   padding-top: 2rem;
 }
 
+section div {
+  display: flex ;
+}
+
+p {
+  max-width:80ch;
+  text-wrap: wrap;
+}
 
 
 svg {

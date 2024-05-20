@@ -13,8 +13,13 @@
   <div id="content">
     <nav>
       <ul>
-          <li>Projects <span class="add">add</span></li>
-          <li><a href="">Home<span class="remove">delete</span></a></li>
+        <li>Projects</li>
+        <li class="add">add</li>
+      </ul>
+      <ul>
+        <li class="home">plus</li>
+        <li>Home</li>
+        <li class="delete">delete</li>
       </ul>
     </nav>
 
@@ -26,9 +31,9 @@
         </header>
         <section class="todo-info">
           <div class="description">
-            <p>120</p>
+            <p>120 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed iusto eveniet voluptate eum suscipit velit libero harum non maxime veritatis, quibusdam amet temporibus, obcaecati saepe a repudiandae sit reiciendis ut. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veniam consectetur ad eaque perferendis vel, exercitationem itaque obcaecati tempore. Eaque, nisi? Temporibus officia assumenda totam corrupti doloribus repellat asperiores recusandae illo! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam aspernatur iste at quam similique accusamus ab, non in, possimus qui magnam, vero soluta facere dolore quaerat dolorum voluptates nam nulla! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat sunt aliquid illo eaque? Aut, quis ut quas ipsam necessitatibus expedita reprehenderit dolorem omnis eaque ducimus tempora iure consectetur dolores ratione.lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio blanditiis quidem commodi sunt. Assumenda magni dignissimos qui culpa ipsum nisi consectetur molestiae quasi omnis, cumque accusamus nostrum earum quos. Ad. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora veniam possimus incidunt quas velit, quae molestias cum, placeat reprehenderit earum illo tempore omnis commodi facere voluptates est ea! Necessitatibus, tempora!</p>
           </div>
-          <div class="dueDate">12-06-24</div>
+          <div class="due-date">12-06-24</div>
           <div class="priority">urgent</div>
           <div class="delete">delete</div>
         </section>
@@ -36,14 +41,14 @@
       </section>
     </div>
 
-    <dialog class="modal" id="modal">
+    <dialog class="modal" id="project">
       <h2>Create a new project</h2>
       <button class="button close-button">close</button>
       <form class="form" method="dialog">
-        <label>ProjectName: <input type="text"></label>
+        <label>ProjectName: <input id="project-name" type="text"></input></label>
         <button id="submit-task" class="button" type="submit">submit</button>
       </form>
-    
+
     </dialog>
 </body>
 </html>
