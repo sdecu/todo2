@@ -1,28 +1,32 @@
+import { pl } from 'date-fns/locale';
 import './style.css';
 import { compareAsc, format } from "date-fns";
 
 
 
 //function to create new project
-const add = document.querySelector('.add')
-  
-add.onclick = function(name)  {
-  const modal = document.querySelector('#project');
-    modal.showModal();
+const add = document.querySelector('.add');
+const modal = document.querySelector('#project');
+const closeModal = document.querySelector(".close-button");
+const submitProject = document.querySelector("#submit-project");
+const input = document.querySelector('#project-name');
 
-    const closeModal = document.querySelector(".close-button");
-    closeModal.addEventListener("click", () => {
-      modal.close();
-    })
-    
-  const submitProject = document.querySelector("#submit-project");
-  const input = document.querySelector('#project-name');
-  submitTask.addEventListener("click", (event) => {
-    let temp = input.value;
-    createNewProject(temp);
-  });
+add.onclick = function(name) {
+  modal.showModal();
 }
 
+closeModal.addEventListener("click", () => {
+  modal.close();
+});
+
+submitProject.addEventListener("click", (event) => {
+  event.preventDefault();
+  const temp = input.value;
+  createNewProject(temp);
+  input.value = '';
+modal.close();
+  plus();
+});
    
       
 
@@ -33,7 +37,7 @@ function createNewProject (name) {
   const ul = document.createElement('ul');
   const plus = document.createElement('li');
   plus.classList.add(i);
-  plus.classList.add(Date.now());
+  plus.classList.add('plus');
   plus.textContent = 'plus'
   ul.append(plus);
 
@@ -78,23 +82,27 @@ function createNewProject (name) {
 }
 test();
 */ 
+function plus()  {
+  const plusarr = document.querySelectorAll('.plus');
 
-add.onclick = function(name)  {
-  const modal = document.querySelector('#project');
-    modal.showModal();
+for (const element of plusarr) {
+  const plus = element.getAttribute('class');
+  const temp = document.getElementsByClassName(plus);
+  const plusEl = temp[0];
+  const cardList = plusEl.closest('.card-list');
 
-    const closeModal = document.querySelector(".close-button");
-    closeModal.addEventListener("click", () => {
-      modal.close();
-    })
-    
-  const submitProject = document.querySelector("#submit-project");
-  const input = document.querySelector('#project-name');
-  submitTask.addEventListener("click", (event) => {
-    let temp = input.value;
-    createNewProject(temp);
+
+  if (plusEl.getAttribute('listener') !== 'true') {
+  plusEl.setAttribute('listener', true);
+  plusEl.addEventListener("click", (event) => {
+  console.log(plusEl);
   });
 }
+
+
+}
+}
+plus();
 
 
 function createNewTask  (parentElement, task)  {
