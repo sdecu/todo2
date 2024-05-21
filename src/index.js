@@ -3,7 +3,9 @@ import './style.css';
 import { compareAsc, format } from "date-fns";
 
 
-let projectObj = {'home' : []}
+let projects = {home : [['test', 'test', 'test', 'test']]};
+
+
 //function to create new project
 const add = document.querySelector('.add');
 const modal = document.querySelector('#project');
@@ -21,7 +23,13 @@ closeModal.addEventListener("click", () => {
 
 submitProject.addEventListener("click", (event) => {
   event.preventDefault();
-  createNewProject(input.value);
+  projects[input.value] = [];
+  const project = document.querySelector('#projects');
+  project.innerHTML = '';
+  for (const property in projects)  {
+
+  createNewProject(property);
+  }
   input.value = '';
 modal.close();
   plus();
@@ -30,7 +38,7 @@ modal.close();
 
 
 function createNewProject (name) {
-  const nav = document.querySelector('nav');
+  const projects = document.querySelector('#projects');
   const i = name;
 
   const ul = document.createElement('ul');
@@ -50,7 +58,7 @@ function createNewProject (name) {
   remove.textContent = 'delete';
   ul.append(remove);
 
-  nav.append(ul); 
+  projects.append(ul); 
 }
 
 //function to create new task
@@ -114,6 +122,7 @@ function createNewTask  (task, description, dueDate, priority) {
   const taskTitle = document.createElement("h2");
   taskTitle.textContent = task;
 
+  // Create the plus icon
   const plusIcon = document.createElement("div");
   plusIcon.classList.add("plus");
   plusIcon.textContent = "plus";
@@ -164,6 +173,7 @@ function createNewTask  (task, description, dueDate, priority) {
 const test = {test : ['test', 'test', 'test', 'test']};
 
 createNewTask(test.test[0], test.test[1], test.test[2], test.test[3], );
+
 
 //add button functionality
 const w = {one : [2, 5]};
