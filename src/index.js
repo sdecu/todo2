@@ -1,53 +1,39 @@
 import { pl } from 'date-fns/locale';
 import './style.css';
+import {docEl} from './documentElements';
 import { compareAsc, format } from "date-fns";
 
 
-let projectsObj = {Home : [['test', 'test', 'test', 'test']]};
-
-
+let projectsObj = {Home : []};
 
 //function to create new project
-const add = document.querySelector('.add');
-const modal = document.querySelector('#project');
-const closeModal = document.querySelectorAll(".close-button");
-const submitProject = document.querySelector("#submit-project");
-const input = document.querySelector('#project-name');
 
-add.onclick = function(name) {
-  modal.showModal();
-  input.focus();
+docEl.add.onclick = function(name) {
+  docEl.modal.showModal();
+  docEl.input.focus();
 }
 
-for (const element of closeModal) {
+for (const element of docEl.closeModal) {
   element.addEventListener("click", () => {
-  modal.close();
+  docEl.modal.close();
 });
 }
 
 
-submitProject.addEventListener("click", (event) => {
+docEl.submitProject.addEventListener("click", (event) => {
   event.preventDefault();
-  projectsObj[input.value] = [];
-  const project = document.querySelector('#projects');
-  project.innerHTML = '';
+  projectsObj[docEl.input.value] = [];
+  docEl.project.innerHTML = '';
   for (const property in projectsObj)  {
 
   createNewProject(property);
   }
-  input.value = '';
-modal.close();
+  docEl.input.value = '';
+  docEl.modal.close();
 });
-   
-    const taskModal = document.querySelector('#task');
-    const submitTask = document.querySelector('#submit-task');
-    const nameInput = document.querySelector('#task-name');
-    const descriptionInput = document.querySelector('#task-description');
-    const dueDateInput = document.querySelector('#due-date');
-    const priorityInput = document.querySelector('#priority');
+
 
 function createNewProject (name) {
-  const projects = document.querySelector('#projects');
   const i = name;
 
   const ul = document.createElement('ul');
@@ -57,13 +43,13 @@ function createNewProject (name) {
   plus.textContent = 'plus';
   plus.addEventListener("click", () =>  {
 
-    taskModal.showModal();
-    input.focus();
+    docEl.taskModal.showModal();
+    docEl.input.focus();
     const arrValues = projectsObj[`${i}`];
 
-    submitTask.addEventListener("click", (event) => {
-      arrValues.push([nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value]);
-      modal.close();
+    docEl.submitTask.addEventListener("click", (event) => {
+      arrValues.push([docEl.nameInput.value, docEl.descriptionInput.value, docEl.dueDateInput.value, docEl.priorityInput.value]);
+      docEl.modal.close();
       for (const element of arrValues)  {
 
         generateTask(element[0], element[1], element[2], element[3]);
@@ -92,31 +78,12 @@ function createNewProject (name) {
   remove.textContent = 'delete';
   ul.append(remove);
 
-  projects.append(ul); 
+  docEl.project.append(ul); 
 }
 
-//function to create new task
-
-/*
-    <dialog class="modal" id="task">
-      <h2>Create a new task</h2>
-      <button class="button close-button">close</button>
-      <form class="form" method="dialog">
-        <label>Task Name: <input id="task-name" type="text"></label>
-        <label>Description: <input id="task-description" type="text"></label>
-        <label>Due date: <input id="due-date" type="text"></label>
-        <label>priority: <input id="priority" type="text"></label>
-        <button id="submit-task" class="button" type="submit">submit</button>
-      </form>
-    </dialog>
-*/ 
 
 
 function generateTask  (task, description, dueDate, priority) {
-  // Create the main card container
-  const cardContainer = document.querySelector("section");
-  cardContainer.classList.add("card-list");
-
   // Create the card element
   const card = document.createElement("article");
   card.classList.add("card");
@@ -175,19 +142,5 @@ function generateTask  (task, description, dueDate, priority) {
   card.appendChild(infoSection);
 
   // Append the card to the card container
-  cardContainer.appendChild(card);
+  docEl.cardContainer.appendChild(card);
 }
-
-
-
-
-//add button functionality
-
-
-function getCard(element) {
-
-}
-
-
-
-  // modal
