@@ -215,10 +215,6 @@ display: flex;
   padding-top: 2rem;
 }
 
-section div {
-  display: flex ;
-}
-
 p {
   max-width:80ch;
   text-wrap: wrap;
@@ -274,4 +270,9 @@ li svg  {
 
 .modal::backdrop {
   background: rgb(0 0 0 / 0.4);
+}
+
+#task {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

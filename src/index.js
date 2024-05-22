@@ -3,39 +3,48 @@ import './style.css';
 import { compareAsc, format } from "date-fns";
 
 
-let projects = {home : [['test', 'test', 'test', 'test']]};
+let projectsObj = {Home : [['test', 'test', 'test', 'test']]};
+
 
 
 //function to create new project
 const add = document.querySelector('.add');
 const modal = document.querySelector('#project');
-const closeModal = document.querySelector(".close-button");
+const closeModal = document.querySelectorAll(".close-button");
 const submitProject = document.querySelector("#submit-project");
 const input = document.querySelector('#project-name');
 
 add.onclick = function(name) {
   modal.showModal();
+  input.focus();
 }
 
-closeModal.addEventListener("click", () => {
+for (const element of closeModal) {
+  element.addEventListener("click", () => {
   modal.close();
 });
+}
+
 
 submitProject.addEventListener("click", (event) => {
   event.preventDefault();
-  projects[input.value] = [];
+  projectsObj[input.value] = [];
   const project = document.querySelector('#projects');
   project.innerHTML = '';
-  for (const property in projects)  {
+  for (const property in projectsObj)  {
 
   createNewProject(property);
   }
   input.value = '';
 modal.close();
-  plus();
 });
    
-
+    const taskModal = document.querySelector('#task');
+    const submitTask = document.querySelector('#submit-task');
+    const nameInput = document.querySelector('#task-name');
+    const descriptionInput = document.querySelector('#task-description');
+    const dueDateInput = document.querySelector('#due-date');
+    const priorityInput = document.querySelector('#priority');
 
 function createNewProject (name) {
   const projects = document.querySelector('#projects');
@@ -46,11 +55,36 @@ function createNewProject (name) {
   plus.classList.add(i);
   plus.classList.add('plus');
   plus.textContent = 'plus';
+  plus.addEventListener("click", () =>  {
+
+    taskModal.showModal();
+    input.focus();
+    const arrValues = projectsObj[`${i}`];
+
+    submitTask.addEventListener("click", (event) => {
+      arrValues.push([nameInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value]);
+      modal.close();
+      for (const element of arrValues)  {
+
+        generateTask(element[0], element[1], element[2], element[3]);
+      }
+    });
+  });
   
   ul.append(plus);
 
   const li = document.createElement('li');
-  li.innerText = i;
+  li.innerText = i
+  li.addEventListener("click", () =>  {
+    const arrValues = projectsObj[`${i}`];
+
+    const section = document.querySelector(".card-list");
+    section.innerHTML = '';
+    for (const element of arrValues)  {
+
+      generateTask(element[0], element[1], element[2], element[3]);
+    }
+  });
   ul.append(li);
 
   const remove = document.createElement('li');
@@ -64,48 +98,21 @@ function createNewProject (name) {
 //function to create new task
 
 /*
-<section class="card-list">
-  <article class="card">
-    <header class="title">
-      <h2>task</h2>
-      <div class="plus">plus</div>
-    </header>
-    <section class="todo-info">
-      <div class="description">
-        <p>120</p>
-      </div>
-      <div class="due-date">12-06-24</div>
-      <div class="priority">urgent</div>
-      <div class="delete">delete</div>
-    </section>
-  </article>
-</section>
+    <dialog class="modal" id="task">
+      <h2>Create a new task</h2>
+      <button class="button close-button">close</button>
+      <form class="form" method="dialog">
+        <label>Task Name: <input id="task-name" type="text"></label>
+        <label>Description: <input id="task-description" type="text"></label>
+        <label>Due date: <input id="due-date" type="text"></label>
+        <label>priority: <input id="priority" type="text"></label>
+        <button id="submit-task" class="button" type="submit">submit</button>
+      </form>
+    </dialog>
 */ 
-function plus()  {
-  const plusarr = document.querySelectorAll('.plus');
-
-for (const element of plusarr) {
-  const plus = element.getAttribute('class');
-  const temp = document.getElementsByClassName(plus);
-  const plusEl = temp[0];
-  const cardList = plusEl.closest('.card-list');
 
 
-  if (plusEl.getAttribute('listener') !== 'true') {
-  plusEl.setAttribute('listener', true);
-  plusEl.addEventListener("click", (event) => {
-    event.preventDefault();
-    createNewTask()
-  });
-}
-
-
-}
-}
-plus();
-
-
-function createNewTask  (task, description, dueDate, priority) {
+function generateTask  (task, description, dueDate, priority) {
   // Create the main card container
   const cardContainer = document.querySelector("section");
   cardContainer.classList.add("card-list");
@@ -170,17 +177,12 @@ function createNewTask  (task, description, dueDate, priority) {
   // Append the card to the card container
   cardContainer.appendChild(card);
 }
-const test = {test : ['test', 'test', 'test', 'test']};
 
-createNewTask(test.test[0], test.test[1], test.test[2], test.test[3], );
+
 
 
 //add button functionality
-const w = {one : [2, 5]};
-const y = w;
-let z = 2;
-w.one[0]++;
-console.log(w.one,y.one,z);
+
 
 function getCard(element) {
 
@@ -189,6 +191,3 @@ function getCard(element) {
 
 
   // modal
-
-
-  
