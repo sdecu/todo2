@@ -96,10 +96,10 @@ function generateTask  (task, description, dueDate, priority) {
   const taskTitle = document.createElement("h2");
   taskTitle.textContent = task;
 
-  // Create the plus icon
-  const plusIcon = document.createElement("div");
-  plusIcon.classList.add("plus");
-  plusIcon.textContent = "plus";
+  // Create the edit icon
+  const editIcon = document.createElement("div");
+  editIcon.classList.add("edit");
+  editIcon.textContent = "edit";
 
   // Append the task title and plus icon to the header
   header.appendChild(taskTitle);

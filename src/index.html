@@ -60,8 +60,14 @@
       <form class="form" method="dialog">
         <label>Task Name: <input id="task-name" type="text"></label>
         <label>Description: <input id="task-description" type="text"></label>
-        <label>Due date: <input id="due-date" type="text"></label>
-        <label>priority: <input id="priority" type="text"></label>
+        <label>Due date: <input id="due-date" type="date"></label>
+        <label>priority: </label>
+        <select id="priority" type="text">
+          <option value="urgent">urgent</option>
+          <option value="high">high</option>
+          <option value="moderate">moderate</option>
+          <option value="low">low </option>
+          </select>
         <button id="submit-task" class="button" type="submit">submit</button>
       </form>
     </dialog>
