@@ -4,7 +4,7 @@ import {docEl} from './documentElements';
 import { compareAsc, format } from "date-fns";
 
 
-let projectsObj = {Home : []};
+let projectsObj = {Home : [["example", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta nulla magni ut excepturi quaerat cum similique libero voluptates doloribus? Accusantium numquam omnis sapiente eos praesentium id deserunt! Inventore, officiis cupiditate.", "2024-12-24", "low"]]};
 
 //function to create new project
 
@@ -32,10 +32,16 @@ docEl.submitProject.addEventListener("click", (event) => {
   docEl.modal.close();
 });
 
+function clearInput() {
+  docEl.nameInput.value = '';
+  docEl.descriptionInput.value = '';
+  docEl.dueDateInput.value =  '';
+  docEl.priorityInput.value = '';
+}
+
 
 function createNewProject (name) {
   const i = name;
-
   const ul = document.createElement('ul');
   const plus = document.createElement('li');
   plus.classList.add(i);
@@ -50,9 +56,10 @@ function createNewProject (name) {
     docEl.submitTask.addEventListener("click", (event) => {
       arrValues.push([docEl.nameInput.value, docEl.descriptionInput.value, docEl.dueDateInput.value, docEl.priorityInput.value]);
       docEl.modal.close();
+      docEl.section.innerHTML = '';
+      clearInput(); 
       for (const element of arrValues)  {
-
-        generateTask(element[0], element[1], element[2], element[3]);
+        generateTask(element[0], element[1], element[2], element[3], `${i}`);
       }
     });
   });
@@ -64,11 +71,11 @@ function createNewProject (name) {
   li.addEventListener("click", () =>  {
     const arrValues = projectsObj[`${i}`];
 
-    const section = document.querySelector(".card-list");
-    section.innerHTML = '';
+    
+    docEl.section.innerHTML = '';
     for (const element of arrValues)  {
-
-      generateTask(element[0], element[1], element[2], element[3]);
+      console.log(projectsObj);
+      generateTask(element[0], element[1], element[2], element[3], `${i}`);
     }
   });
   ul.append(li);
@@ -83,7 +90,7 @@ function createNewProject (name) {
 
 
 
-function generateTask  (task, description, dueDate, priority) {
+function generateTask  (task, description, dueDate, priority, name) {
   // Create the card element
   const card = document.createElement("article");
   card.classList.add("card");
@@ -103,7 +110,7 @@ function generateTask  (task, description, dueDate, priority) {
 
   // Append the task title and plus icon to the header
   header.appendChild(taskTitle);
-  header.appendChild(plusIcon);
+  header.appendChild(editIcon);
 
   // Create the task info section
   const infoSection = document.createElement("section");
@@ -129,6 +136,7 @@ function generateTask  (task, description, dueDate, priority) {
   // Create the delete element
   const deleteElement = document.createElement("div");
   deleteElement.classList.add("delete");
+  deleteElement.setAttribute('project', name);
   deleteElement.textContent = "delete";
 
   // Append the task info elements to the info section
