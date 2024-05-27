@@ -48,22 +48,32 @@ function createNewProject (name) {
   plus.classList.add('plus');
   plus.textContent = 'plus';
   plus.addEventListener("click", () =>  {
-
+    const projName = plus.getAttribute("class").split(' ')[0];
+    console.log(projName);
     docEl.taskModal.showModal();
     docEl.input.focus();
-    const arrValues = projectsObj[`${i}`];
+    const arrValues = projectsObj[`${projName}`];
+  console.log(projName);
 
-    docEl.submitTask.addEventListener("click", (event) => {
+  docEl.submitTask.addEventListener("click", (event) => {
+    if (docEl.nameInput.value) {
       arrValues.push([docEl.nameInput.value, docEl.descriptionInput.value, docEl.dueDateInput.value, docEl.priorityInput.value]);
-      docEl.modal.close();
-      docEl.section.innerHTML = '';
-      clearInput(); 
-      for (const element of arrValues)  {
-        generateTask(element[0], element[1], element[2], element[3], `${i}`);
-      }
-    });
+    docEl.modal.close();
+    docEl.section.innerHTML = '';
+    clearInput(); 
+    console.log(projName);
+    for (const element of arrValues)  {
+      generateTask(element[0], element[1], element[2], element[3], `${i}`);
+    }
+   
+    }
+     
+     console.log(projName);
   });
-  
+    
+  });      
+
+
   ul.append(plus);
 
   const li = document.createElement('li');
@@ -74,7 +84,6 @@ function createNewProject (name) {
     
     docEl.section.innerHTML = '';
     for (const element of arrValues)  {
-      console.log(projectsObj);
       generateTask(element[0], element[1], element[2], element[3], `${i}`);
     }
   });
@@ -137,6 +146,21 @@ function generateTask  (task, description, dueDate, priority, name) {
   const deleteElement = document.createElement("div");
   deleteElement.classList.add("delete");
   deleteElement.setAttribute('project', name);
+  deleteElement.addEventListener("click", ()  =>  {
+
+
+  const arr = [`${task}`, `${description}`, `${dueDate}`, `${priority}`];
+
+  projectsObj[`${name}`].splice(arrayEquals(projectsObj[`${name}`], arr), 1);
+
+  docEl.section.innerHTML = '';
+  for (const element of projectsObj[`${name}`])  {
+    generateTask(element[0], element[1], element[2], element[3], `${name}`);
+  }
+
+  console.log(arrayEquals(projectsObj["Home"], arr));
+  console.log(projectsObj);
+});
   deleteElement.textContent = "delete";
 
   // Append the task info elements to the info section
@@ -151,4 +175,18 @@ function generateTask  (task, description, dueDate, priority, name) {
 
   // Append the card to the card container
   docEl.cardContainer.appendChild(card);
-}
+}  
+
+function arrayEquals(a, b) {
+let i = 0;
+let bool = true;
+
+    while(i <= a.length && Array.isArray(a[i]) &&
+    Array.isArray(b) &&
+    a[i].length === b.length && bool)  {
+      if  (a[i].every((val, index) => val === b[index]))  {
+        bool = false;
+      } else i++;
+    }
+    return i;
+  }

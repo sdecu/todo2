@@ -13,7 +13,7 @@ export const docEl = (function() {
     const priorityInput = document.querySelector('#priority');
     const section = document.querySelector(".card-list");
     const cardContainer = document.querySelector("section");
-  
+     
     return {
       add,
       modal,
